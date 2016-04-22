@@ -35,6 +35,8 @@ def randomString(n):
 
 def main():
     s = ''.join(sys.argv[1:]) or raw_input('> ')
+    if not s:
+        return
 
     predefinedFunctions = ['randomNumber', 'randomString']
     for f in predefinedFunctions:
@@ -42,9 +44,8 @@ def main():
             n = eval(s[len(f) + 1:])
             s = '"{}"'.format(globals()[f](n))
 
-    if s:
-        s = process(s)
-        copyToClipboard(s)
+    s = process(s)
+    copyToClipboard(s)
 
 
 main()
