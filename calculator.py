@@ -4,11 +4,12 @@
 #
 # A quick commandline calculator.
 #
-import sys
+import os
 import random
 import string
+import sys
 import uuid
-from Tkinter import Tk
+from tkinter import Tk
 
 def process(s):
     result = str(eval(s))
@@ -16,12 +17,13 @@ def process(s):
     return result
 
 def copyToClipboard(s):
-    # (Doesn't work in python 3, so we use python 2)
-    root = Tk()
-    root.withdraw()
-    root.clipboard_clear()
-    root.clipboard_append(s)
-    root.destroy()
+    # Doesn't work well on windows :(
+    if os.name != 'nt':
+        root = Tk()
+        root.withdraw()
+        root.clipboard_clear()
+        root.clipboard_append(s)
+        root.destroy()
 
 def randomNumber(n):
     return ''.join(random.SystemRandom().choice(string.digits) for _ in range(n))
